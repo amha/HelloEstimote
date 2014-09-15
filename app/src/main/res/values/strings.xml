@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Beacon Search</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="default_beacon_count">0</string>
+    <string name="beacon_intro">Beacons Near You:</string>
+    <string name="start">Map</string>
+    <string name="stop">List</string>
+    <string name="toggle_text">Search for Beacons: </string>
+    <string name="rssi_label">RSSI:</string>
+    <string name="major_label">Major:</string>
+    <string name="minor_label">Minor:</string>
+    <string name="title_activity_office_map">Floor Plan</string>
+
+</resources>
