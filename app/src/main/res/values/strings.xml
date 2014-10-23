@@ -4,6 +4,8 @@
     <string name="app_name">Beacon Search</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Main Activity -->
     <string name="default_beacon_count">0</string>
     <string name="beacon_intro">Beacons Near You:</string>
     <string name="start">Map</string>
@@ -12,6 +14,14 @@
     <string name="rssi_label">RSSI:</string>
     <string name="major_label">Major:</string>
     <string name="minor_label">Minor:</string>
+
+    <!-- Map Activity -->
     <string name="title_activity_office_map">Floor Plan</string>
+
+    <!-- Preferences -->
+    <string name="pref_behavior_section_title">Application Behavior</string>
+    <string name="pref_mode_title">Demo Mode?</string>
+    <string name="pref_mode_summary">If checked, the app behaves in Demo Mode and assumes there are 4 beacons in range.</string>
+    <string name="title_activity_settings">Settings</string>
 
 </resources>

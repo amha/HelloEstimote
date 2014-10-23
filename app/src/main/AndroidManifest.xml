@@ -11,11 +11,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
-            android:name="com.amha.helloestimote.app.EstimoteActivity"
+            android:name=".EstimoteActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,10 +28,14 @@
             android:exported="false" />
 
         <activity
-            android:name="com.amha.helloestimote.app.OfficeMapActivity"
+            android:name=".OfficeMapActivity"
             android:label="@string/title_activity_office_map"
             android:parentActivityName=".EstimoteActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 

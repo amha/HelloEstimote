@@ -14,8 +14,6 @@ import android.widget.Toast;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
-import com.parse.Parse;
-import com.parse.ParseObject;
 
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class EstimoteActivity extends Activity {
         setContentView(R.layout.activity_estimote);
 
         //Add Parse application key here:
-        Parse.initialize(this, "ADD_KEY_HERE", "ADD_APP_ID");
+        //Parse.initialize(this, "key1", "key 2");
 
         //Get ui text views to update with beacon data
         mText = (TextView)findViewById(R.id.beacon_count);
@@ -63,6 +61,8 @@ public class EstimoteActivity extends Activity {
                     mRssi.setText(mBeacon.getRssi() + "");
                     mMajor.setText(mBeacon.getMajor() + "");
 
+                    /* Removing parse call for the time being.
+
                     //create parse object
                     ParseObject testObject = new ParseObject("DemoBeaconData");
 
@@ -72,8 +72,8 @@ public class EstimoteActivity extends Activity {
                     testObject.put("minor", mBeacon.getMinor() + "");
 
                     //save to parse
-                    testObject.saveInBackground();
-
+                    //testObject.saveInBackground();
+                    */
                 }
             }
         });
@@ -93,6 +93,8 @@ public class EstimoteActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Intent mIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(mIntent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -153,10 +155,8 @@ public class EstimoteActivity extends Activity {
         }
     }
 
-
     public void mapButtonClick (View v){
         Intent mIntent = new Intent(getApplicationContext(), OfficeMapActivity.class);
         startActivity(mIntent);
     }
-
 }
