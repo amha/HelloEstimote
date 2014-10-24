@@ -5,11 +5,17 @@
         android:title="@string/pref_behavior_section_title"
         android:key="pref_key_behavior_settings">
 
-        <CheckBoxPreference
+     <!--   <CheckBoxPreference
             android:key="pref_mode_setting"
             android:title="@string/pref_mode_title"
             android:summary="@string/pref_mode_summary"
-            android:defaultValue="false" />
+            android:defaultValue="false" />-->
+
+        <SwitchPreference
+            android:title="@string/pref_mode_title"
+            android:key="pref_mode_settings"
+            android:summary="@string/pref_mode_summary"
+            android:defaultValue="false"/>
 
     </PreferenceCategory>
 </PreferenceScreen>

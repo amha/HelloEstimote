@@ -19,9 +19,13 @@
     <string name="title_activity_office_map">Floor Plan</string>
 
     <!-- Preferences -->
-    <string name="pref_behavior_section_title">Application Behavior</string>
-    <string name="pref_mode_title">Demo Mode?</string>
-    <string name="pref_mode_summary">If checked, the app behaves in Demo Mode and assumes there are 4 beacons in range.</string>
+    <string name="pref_behavior_section_title">Settings</string>
+    <string name="pref_mode_title">Demo Mode</string>
+    <string name="pref_mode_summary">Running in demo mode will pass a variable to the backend. Do you want to run in demo mode?</string>
     <string name="title_activity_settings">Settings</string>
+
+    <!-- Dialog Message -->
+    <string name="dialog_title">Bluetooth Off</string>
+    <string name="dialog_message">To run this app bluetooth needs to be on. Do you want to turn bluetooth on?</string>
 
 </resources>

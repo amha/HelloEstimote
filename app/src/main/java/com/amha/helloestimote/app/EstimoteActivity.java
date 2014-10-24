@@ -1,6 +1,25 @@
+/**
+ * Copyright 2014 Amha Mogus
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ **/
 package com.amha.helloestimote.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -19,13 +38,25 @@ import java.util.List;
 
 public class EstimoteActivity extends Activity {
 
-
-    private static final int SCAN_WAIT_TIME = 50000;
+    // Default value provided by Estimote.
     private static final String ESTIMOTE_PROXIMITY_UUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
+
+    // Setting the scan region or area variables/
     private static final Region ALL_ESTIMOTE_BEACONS = new Region("regionId", ESTIMOTE_PROXIMITY_UUID, null, null);
 
+    // The amount of time to wait, in miliseconds, before the we scan for beacons.
+    private static final int SCAN_WAIT_TIME = 50000;
+
+    // Interface with beacon ranging mechanism.
     private BeaconManager beaconManager;
 
+    // Used for bluetooth request.
+    private final static int REQUEST_ENABLE_BT = 1;
+
+    // Console Hook.
+    private static final String TAG = "AMHA-OUTPUT";
+
+    // TODO: Save these values in a data structure.
     TextView mText;
     TextView mRssi;
     TextView mMajor;
@@ -37,6 +68,35 @@ public class EstimoteActivity extends Activity {
 
         //Add Parse application key here:
         //Parse.initialize(this, "key1", "key 2");
+
+        // Check Bluetooth has been turned on.
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(!bluetoothAdapter.isEnabled()){
+            // Create Alert Dialog.
+            AlertDialog.Builder builder = new AlertDialog.Builder(EstimoteActivity.this);
+            builder.setTitle(R.string.dialog_title)
+                    .setMessage(R.string.dialog_message)
+                    .setNegativeButton("No Thanks", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Log.d(TAG, "Negative Button Pressed.");
+
+                                }
+                            }
+                    ).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Log.d(TAG, "Positive Button Pressed.");
+                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+
+                    //TODO: Show toast message when bluetooth has been enabled.
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+        }
 
         //Get ui text views to update with beacon data
         mText = (TextView)findViewById(R.id.beacon_count);
@@ -60,20 +120,6 @@ public class EstimoteActivity extends Activity {
                     Beacon mBeacon = beacons.get(0);
                     mRssi.setText(mBeacon.getRssi() + "");
                     mMajor.setText(mBeacon.getMajor() + "");
-
-                    /* Removing parse call for the time being.
-
-                    //create parse object
-                    ParseObject testObject = new ParseObject("DemoBeaconData");
-
-                    //populate parse object with beacon data
-                    testObject.put("rssi", mBeacon.getRssi() + "");
-                    testObject.put("major", mBeacon.getMajor() + "");
-                    testObject.put("minor", mBeacon.getMinor() + "");
-
-                    //save to parse
-                    //testObject.saveInBackground();
-                    */
                 }
             }
         });
@@ -118,9 +164,7 @@ public class EstimoteActivity extends Activity {
                 }
             }
         });
-
     }
-
 
     /**
      * Stop scanning for iBeacons.
